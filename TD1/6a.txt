@@ -1,0 +1,15 @@
+NEW "ReconL" 2
+START @copie
+
+END @e "fin"
+
+# Copier tous les zéros vers la bande 2
+FROM @copie
+'0,'_ '0,'0 R,R @copie
+'_|'1,'_ S,L @suivant
+
+# Avancer la 1 et reculer la 2 simultanément
+# Pour un mot bien formé, les deux arriveront sur _ en même temps, autrement on est en cas d'erreur
+FROM @suivant
+'1,'0 R,L @suivant
+'_,'_ S,S @e

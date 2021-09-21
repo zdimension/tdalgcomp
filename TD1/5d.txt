@@ -1,0 +1,27 @@
+NEW "Longueur" 2
+START @i
+
+END @e "fin"
+
+# Compte initial à 1 (ou 0 si entrée vide)
+FROM @i
+'a,'_ 'a,'1 S,R @right
+'_,'_ '_,'0 S,R @e
+
+# Incrémenter chiffre
+FROM @inc
+'a,'0 'a,'1 S,S @right
+'a,'1 'a,'0 S,L @inc_carry
+'a,'_ S,R @right
+'_,'1|'0 S,S @e
+
+# Incrémenter chiffre avec retenue
+FROM @inc_carry
+'a,'1 'a,'0 S,L @inc_carry
+'a,'0|'_ 'a,'1 S,S @right
+
+# Aller tout à droite du compteur
+FROM @right
+'a,'0|'1 S,R @right
+'a,'_ R,L @inc
+'_,'1|'0 S,S @e
